@@ -1,0 +1,14 @@
+services:
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                INSTALL_ZSH: "true"
+                USER_UID: "1000"
+                USER_GID: "1000"
+        volumes:
+            - ..:/home/vscode/workspace:cached
+        ports:
+            - "8000:8000"
+        command: sleep infinity

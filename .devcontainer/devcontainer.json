@@ -1,0 +1,127 @@
+{
+    "name": "Dev Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "php",
+    "workspaceFolder": "/home/vscode/workspace",
+    "forwardPorts": [
+        8000
+    ],
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Configuración general
+                "workbench.startupEditor": "none",
+                "editor.minimap.enabled": true,
+                "editor.tabSize": 4,
+                "editor.detectIndentation": false,
+                "editor.wordWrap": "on",
+                "editor.formatOnSave": true,
+                "editor.bracketPairColorization.enabled": true,
+                "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+                "editor.guides.bracketPairs": true,
+                "editor.autoClosingBrackets": "always",
+                "window.confirmBeforeClose": "keyboardOnly",
+                "editor.formatOnType": true,
+
+                // Configuración de PHP
+                "php.executablePath": "/usr/local/bin/php",
+                "php.validate.executablePath": "/usr/local/bin/php",
+                "php.suggest.basic": false,
+                "intelephense.files.associations": ["*.php", "*.phtml"],
+                "intelephense.environment.includePaths": ["vendor"],
+                "intelephense.files.maxSize": 5000000,
+                "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+                "[php]": {
+                    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+                },
+                "php.format.codeStyle": "PSR-12",
+                "php-cs-fixer.executablePath": "php-cs-fixer",
+                "php-cs-fixer.onsave": false,
+                "php-cs-fixer.rules": "@PSR12",
+                "php-cs-fixer.config": ".php-cs-fixer.php;.php-cs-fixer.dist.php;.php_cs;.php_cs.dist",
+                "php-cs-fixer.allowRisky": false,
+                "php-cs-fixer.pathMode": "override",
+                "php-cs-fixer.ignorePHPVersion": false,
+                "php-cs-fixer.exclude": [],
+                "php-cs-fixer.autoFixByBracket": false,
+                "php-cs-fixer.autoFixBySemicolon": false,
+                "php-cs-fixer.formatHtml": false,
+                "php-cs-fixer.documentFormattingProvider": true,
+
+                // Configuración para Laravel Blade
+                "[blade]": {
+                    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+                },
+
+                // Configuración de Prettier para JavaScript y JSON
+                "[javascript]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                },
+                "[json]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                },
+                "[typescript]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                },
+
+                // Configuración de archivos y búsquedas
+                "files.exclude": {
+                    "**/node_modules": true,
+                    //"**/vendor": true,
+                    "**/__pycache__": true,
+                    "**/.git": true
+                },
+                "search.exclude": {
+                    "**/node_modules": true,
+                    //"**/vendor": true,
+                    "**/__pycache__": true,
+                    "**/.git": true
+                },
+                "files.associations": {
+                    "*.blade.php": "blade"
+                },
+
+                // Configuración de terminal
+                "terminal.integrated.defaultProfile.linux": "zsh", // Cambia a zsh o tu shell preferido
+                "terminal.integrated.env.linux": {
+                "PATH": "/usr/local/php/bin:${env:PATH}" // Ajusta según tu entorno
+                },
+
+                // Configuración de extensiones y tareas
+                "extensions.autoUpdate": true,
+                "explorer.confirmDragAndDrop": false,
+                "git.enableSmartCommit": true,
+                "git.confirmSync": false
+            },
+            "extensions": [
+                "DEVSENSE.phptools-vscode",
+                "streetsidesoftware.code-spell-checker",
+                "xdebug.php-debug",
+                "EditorConfig.EditorConfig",
+                "mrmlnc.vscode-duplicate",
+                "eamodio.gitlens",
+                "junstyle.php-cs-fixer",
+                "mehedidracula.php-namespace-resolver",
+                "redhat.vscode-yaml",
+                "gruntfuggly.todo-tree",
+                "github.copilot",
+                "onecentlin.laravel-blade",
+                "esbenp.prettier-vscode",
+                "shufo.vscode-blade-formatter"
+            ]
+        }
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": {
+        "chown" : "chown -R vscode:vscode /home/vscode/workspace",
+        "composer" : "composer install",
+        // "env" : "cp .env.example .env",
+        // "key" : "php artisan key:generate",
+        // "migrate" : "php artisan migrate --seed"
+        //"job" : "php artisan queue:work --daemon"
+    },
+    "postStartCommand": "php artisan serve --host=0.0.0.0 --port=8000"
+}
