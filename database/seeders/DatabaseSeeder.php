@@ -13,11 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Create default admin user
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        // Seed index data and historical rates
+        $this->call([
+            IndexDataSeeder::class,
+            PlanSeeder::class,
         ]);
     }
 }
